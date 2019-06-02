@@ -65,7 +65,14 @@ module.exports = {
     var userSpec = utilities.getUserSegment(parameters);
     var folderSpec = parameters.folderId === undefined ? '' : getFolderSegment() + parameters.folderId;
 
-    var requestUrl = base.apiEndpoint() + userSpec + folderSpec + '/Messages';
+    var requestUrl;
+    if(parameters.folderId === '') {
+      requestUrl = base.apiEndpoint() + userSpec + folderSpec;
+    } else {
+      requestUrl = base.apiEndpoint() + userSpec + folderSpec + '/Messages/';
+    }
+    
+    console.log(requestUrl);
 
     var apiOptions = {
       url: requestUrl,
